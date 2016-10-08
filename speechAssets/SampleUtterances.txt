@@ -1,10 +1,10 @@
-StartMeditateIntent I have {Time} minutes to meditate
-StartMeditateIntent I want to do some {Meditation} meditation
-StartMeditateIntent I have {Time} minutes to do some {Meditation} meditation
-StartMeditateIntent I want to do some {Meditation} meditation for {Time} minutes
+StartMeditationIntent I have {Length} minutes to meditate
+StartMeditationIntent I want to do some {Meditation} meditation
+StartMeditationIntent I have {Length} minutes to do some {Meditation} meditation
+StartMeditationIntent I want to do some {Meditation} meditation for {Length} minutes
 
-StartMeditateIntent I want to meditate
-StartMeditateIntent Let's meditate
+StartMeditationIntent I want to meditate
+StartMeditationIntent Let's meditate
 
 QuickStartMeditationIntent I need to meditate right now
 QuickStartMeditationIntent can we meditate right now
