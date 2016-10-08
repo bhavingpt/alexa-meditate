@@ -1,8 +1,8 @@
 // This code sample shows how to call and receive external rest service data, within your skill Lambda code.
 
-// var AWS = require('aws-sdk');
-
 // var https = require('https');
+
+const quickMeditationSSML = "";
 
 exports.handler = function( event, context ) {
     var say = "";
@@ -19,7 +19,13 @@ exports.handler = function( event, context ) {
     } else {
         var IntentName = event.request.intent.name;
 
-        if (IntentName === "StartMeditateIntent") {
+        if (IntentName === "QuickStartMeditationIntent") {
+            say = "Starting the quick meditation";
+            shouldEndSession = true;
+            // This line concludes the lambda call.  Move this line to within any asynchronous callbacks that return and use data.
+            context.succeed({sessionAttributes: sessionAttributes, response: buildResponse(quickMeditationSSML, shouldEndSession) });
+        } 
+        else if (IntentName === "StartMeditationIntent") {
             say = "Start Meditate Intent has been called"
             // This line concludes the lambda call.  Move this line to within any asynchronous callbacks that return and use data.
             context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
@@ -36,23 +42,22 @@ exports.handler = function( event, context ) {
     }
 };
 
-function buildSpeechletResponse(say, shouldEndSession) {
+function buildResponse(ssmlValue, shouldEndSession) {
     return {
         outputSpeech: {
             type: "SSML",
-            ssml: "<speak>" + say + "</speak>"
+            ssml: ssmlValue
         },
         reprompt: {
             outputSpeech: {
                 type: "SSML",
-                ssml: "<speak>Please try again. " + say + "</speak>"
+                ssml: "<speak>Please try again.</speak>"
             }
         },
-        card: {
-            type: "Simple",
-            title: "My Card Title",
-            content: "My Card Content, displayed on the Alexa App or alexa.amazon.com"
-        },
         shouldEndSession: shouldEndSession
-    };
+    }
+}
+
+function buildSpeechletResponse(say, shouldEndSession) {
+    return buildResponse("<speak>" + say + "</speak>", shouldEndSession);
 }

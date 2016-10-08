@@ -1,9 +1,21 @@
-
 {
   "intents": [
     {
-      "intent": "StartMeditationIntent"
-    }
-
+    	"intent": "StartMeditationIntent",
+    	"slots": [
+	        {
+	          "name":"Time",
+	          "type":"LIST_OF_TIMES"
+	        },
+	        {
+	          "name":"Meditation",
+	          "type":"LIST_OF_MEDITATIONS"
+	        }
+	    ]
+    },
+    {"intent": "QuickStartMeditationIntent"},
+    {"intent": "AMAZON.HelpIntent"},
+    {"intent": "AMAZON.StopIntent"},
+    {"intent": "AMAZON.CancelIntent"}
   ]
 }
