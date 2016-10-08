@@ -1,0 +1,7 @@
+var iterations = 6 * min;
+var counter = 0;
+
+//say var
+while (counter < iterations) {
+    say += "<speak>Inhale. <break time="4s"/> Exhale. <break time="4s"/></speak>";
+}
