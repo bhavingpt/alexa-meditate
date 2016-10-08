@@ -5,13 +5,31 @@
     	"slots": [
 	        {
 	          "name":"Length",
-	          "type":"AMAZON.DURATION"
+	          "type":"LIST_OF_LENGTHS"
 	        },
 	        {
 	          "name":"Meditation",
 	          "type":"LIST_OF_MEDITATIONS"
 	        }
 	    ]
+    },
+    {
+    	"intent": "AddLengthIntent",
+    	"slots": [
+    		{
+    		  "name":"Length",
+    		  "type":"LIST_OF_LENGTHS"
+    		}
+    	]
+    },
+    {
+    	"intent": "AddMeditationIntent",
+    	"slots": [
+    		{
+    		  "name":"Meditation",
+    		  "type":"LIST_OF_MEDITATIONS"
+    		}
+    	]
     },
     {"intent": "QuickStartMeditationIntent"},
     {"intent": "AMAZON.HelpIntent"},
