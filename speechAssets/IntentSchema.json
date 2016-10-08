@@ -5,7 +5,7 @@
     	"slots": [
 	        {
 	          "name":"Length",
-	          "type":"LIST_OF_LENGTHS"
+	          "type":"AMAZON.DURATION"
 	        },
 	        {
 	          "name":"Meditation",

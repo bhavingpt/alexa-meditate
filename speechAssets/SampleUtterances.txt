@@ -9,4 +9,3 @@ StartMeditationIntent Let's meditate
 QuickStartMeditationIntent I need to meditate right now
 QuickStartMeditationIntent can we meditate right now
 QuickStartMeditationIntent let's meditate right now
-
