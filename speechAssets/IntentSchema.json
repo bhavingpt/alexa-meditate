@@ -1,17 +1,7 @@
 {
   "intents": [
     {
-    	"intent": "StartMeditationIntent",
-    	"slots": [
-	        {
-	          "name":"Length",
-	          "type":"LIST_OF_LENGTHS"
-	        },
-	        {
-	          "name":"Meditation",
-	          "type":"LIST_OF_MEDITATIONS"
-	        }
-	    ]
+    	"intent": "StartMeditationIntent"
     },
     {
     	"intent": "AddLengthIntent",
