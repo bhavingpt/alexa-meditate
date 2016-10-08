@@ -25,20 +25,26 @@ exports.handler = function( event, context ) {
             shouldEndSession = true;
             context.succeed({sessionAttributes: sessionAttributes, response: buildResponse(quickMeditationSSML, shouldEndSession) });
         }
-        else if (IntentName === "StartMeditationIntent") {
+        else if (IntentName === "AddLengthIntent") {
             say = "How many minutes would you like to meditate for?";
             context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
         }
-        else if (IntentName === "AddLengthIntent") {
+        else if (IntentName === "AddMeditationIntent") {
             var time = event.request.intent.slots.Length.value;
-            sessionAttributes["time"] = time;
+            sessionAttributes["length"] = time;
             say = "Do you want breathing meditation or music meditation?";
             context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
         }
-        else if (IntentName === "AddMeditationIntent") {
-            var type = event.request.intent.slots.Meditation.value;
-            sessionAttributes.type = type;
+        else if (IntentName === "BeginMeditationIntent") {
+            say = "Let's begin: please close your eyes. Now ";
+            sessionAttributes.meditation = event.request.intent.slots.Meditation.value;
+            shouldEndSession = true;
+            var n = 1;
+            for(var i = 0; i < parseInt(sessionAttributes.length); i++){
+                say += 'Inhale. <break time="4s"/> Exhale. <break time="4s"/>';
+            }
             context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
+            // beginMeditation();
         }
         else if (IntentName === "AMAZON.StopIntent" || IntentName === "AMAZON.CancelIntent") {
             say = "You asked for " + sessionAttributes.requestList.toString() + ". Thanks for playing!";
@@ -52,10 +58,10 @@ exports.handler = function( event, context ) {
     }
 
     function beginMeditation(){
-        if(sessionAttributes["time"] !== null && sessionAttributes["length"] !== null) {
+        if(sessionAttributes.length !== null && sessionAttributes.meditation !== null) {
             shouldEndSession = true;
-            if(type == "breathing"){
-                say = breathingConstructor(time);
+            if(sessionAttributes.meditation == "breathing"){
+                say = breathingConstructor(sessionAttributes.length);
                 context.succeed({sessionAttributes: sessionAttributes, response: buildResponse(say, shouldEndSession) });
             }
             else{ //music
@@ -65,7 +71,7 @@ exports.handler = function( event, context ) {
         else{
             shouldEndSession = true;
             say = "Broken: " + sessionAttributes.time + ", " + sessionAttributes.length;
-            context.succeed({sessionAttributes: sessionAttributes, response: buildResponse(say, shouldEndSession) });
+            context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
         }
     }
 };
@@ -73,12 +79,14 @@ exports.handler = function( event, context ) {
 
 
 function breathingConstructor(min){
-    var say = "";
+    min = parseInt(min);
+    var say = "<speak>";
     var iterations = 6 * min;
     var counter = 0;
     while (counter < iterations) {
-        say += '<speak>Inhale. <break time="4s"/> Exhale. <break time="4s"/></speak>';
+        say += 'Inhale. <break time="4s"/> Exhale. <break time="4s"/>';
     }
+    say += "</speak>";
     return say;
 }
 
