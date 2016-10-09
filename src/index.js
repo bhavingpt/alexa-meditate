@@ -15,7 +15,7 @@ exports.handler = function( event, context ) {
     }
 
     if (event.request.type === "LaunchRequest") {
-        say = "Welcome to your meditation session.";
+        say = "Hello, <phoneme alphabet=\"ipa\" ph=\"ruː'ʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session was a -1 out of 10: are you ready to make this one even better?";
         context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
     } else {
         var IntentName = event.request.intent.name;

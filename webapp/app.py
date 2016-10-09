@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, render_template, jsonify
+from flask import Flask, request, Response, render_template, jsonify, send_from_directory
 from functools import wraps
 import sqlite3
 import logging
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return "Home page"
+    return send_from_directory('static', 'index.html')
 
 @app.route('/session_rating')
 def add_session():
