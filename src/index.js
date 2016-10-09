@@ -46,7 +46,7 @@ exports.handler = function( event, context ) {
                     say += 'Slowly inhale. <break time="3s"/> Slowly exhale. <break time="3s"/>';
                 }
             } else {
-                say += "Kick back, relax, and flow along with some of this music!";
+                say += " Kick back, relax, and flow along with some of this music!";
                 for(var i = 0; i < parseInt(sessionAttributes.length); i++){
                     say += '<audio src="https://github.com/bhavingpt/alexa-meditate/blob/master/music/60s_fade.mp3"/>'; 
                 }
