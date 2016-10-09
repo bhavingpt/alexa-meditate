@@ -87,7 +87,7 @@ exports.handler = function(event, context) {
             shouldEndSession = true;
             say = "Great! Stay chill until next time.";
 
-            http.get(BASE_URL+"/session_rating?score="+sessionAttributes.score, function(response) {
+            http.get(BASE_URL+"/session_rating?rating="+sessionAttributes.score, function(response) {
                 console.log(response);
                 var lastScore = "";
                 response.on('data', function(d) {

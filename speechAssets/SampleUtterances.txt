@@ -1,5 +1,9 @@
 AddLengthIntent I want to meditate
 AddLengthIntent Let's meditate
+AddLengthIntent Yes
+AddLengthIntent Yes let's get started
+AddLengthIntent Yes let's do this
+
 
 AddMeditationIntent I would like to meditate for {Length} minutes
 AddMeditationIntent I would like to meditate for {Length} minute
