@@ -299,6 +299,16 @@ populateCalendar(month);
 // ...
 // month = Current Month// Scroll to the very bottom and change the argument in PopulateCalendar() to change the month view.
 var entries = []
+var colors = ["#E0F7FA",
+"#B2EBF2",
+"#80DEEA",
+"#4DD0E1",
+"#26C6DA",
+"#00BCD4",
+"#00ACC1",
+"#0097A7",
+"#00838F",
+"#006064"];
 
 {% for entry in entries %}
 entries.push({
@@ -310,7 +320,8 @@ entries.push({
 for(var i = 0; i < entries.length; i++){
   var week = ((entries[i].date.getDate() - entries[i].date.getDay() - 2) / 7) + 2
   console.log(week);
-  $(".week"+week)[0].children[entries[i].date.getDay()].style = "background-color:yellow"
+  $(".week"+week)[0].children[entries[i].date.getDay()].style = "background-color:" + colors[entries[i].score];
+  $(".week"+week)[0].children[entries[i].date.getDay()].innerHTML = "<div style='color:white'>Score: " + entries[i].score + "</div>";
 }
 
     </script>
