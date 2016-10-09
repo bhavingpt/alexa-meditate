@@ -48,7 +48,7 @@ exports.handler = function( event, context ) {
             } else {
                 say += " Kick back, relax, and flow along with some of this music!";
                 for(var i = 0; i < parseInt(sessionAttributes.length); i++){
-                    say += '<audio src="https://github.com/bhavingpt/alexa-meditate/blob/master/music/60s_fade.mp3"/>'; 
+                    say += '<audio src="https://github.com/bhavingpt/alexa-meditate/blob/master/music/60s_fade.mp3"/>';
                 }
             }
             
