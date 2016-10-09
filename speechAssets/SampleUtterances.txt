@@ -3,8 +3,11 @@ AddLengthIntent Let's meditate
 
 AddMeditationIntent I would like to meditate for {Length} minutes
 AddMeditationIntent I would like to meditate for {Length} minute
+AddMeditationIntent {Length} minutes
+AddMeditationIntent {Length} minute
 
 BeginMeditationIntent I would like to do {Meditation} meditation
+BeginMeditationIntent {Meditation} meditation
 
 QuickStartMeditationIntent I need to meditate right now
 QuickStartMeditationIntent can we meditate right now
