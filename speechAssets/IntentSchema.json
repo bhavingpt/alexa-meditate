@@ -1,17 +1,25 @@
 {
   "intents": [
     {
-    	"intent": "StartMeditationIntent",
+    	"intent": "AddLengthIntent"
+    },
+    {
+    	"intent": "AddMeditationIntent",
     	"slots": [
-	        {
-	          "name":"Length",
-	          "type":"AMAZON.DURATION"
-	        },
-	        {
-	          "name":"Meditation",
-	          "type":"LIST_OF_MEDITATIONS"
-	        }
-	    ]
+    		{
+    		  "name":"Length",
+    		  "type":"LIST_OF_LENGTHS"
+    		}
+    	]
+    },
+    {
+    	"intent": "BeginMeditationIntent",
+    	"slots": [
+    		{
+    		  "name":"Meditation",
+    		  "type":"LIST_OF_MEDITATIONS"
+    		}
+    	]
     },
     {"intent": "QuickStartMeditationIntent"},
     {"intent": "AMAZON.HelpIntent"},
