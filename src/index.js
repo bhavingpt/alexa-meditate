@@ -15,7 +15,7 @@ exports.handler = function( event, context ) {
     }
 
     if (event.request.type === "LaunchRequest") {
-        say = "Hello, <phoneme alphabet=\"ipa\" ph=\"ruː'ʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session was a -1 out of 10: are you ready to make this one even better?";
+        say = "Hello <phoneme alphabet=\"ipa\" ph=\"'ruː.ʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session was a -1 out of 10: are you ready to make this one even better?";
         context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
     } else {
         var IntentName = event.request.intent.name;
@@ -31,11 +31,11 @@ exports.handler = function( event, context ) {
         else if (IntentName === "AddMeditationIntent") {
             var time = event.request.intent.slots.Length.value;
             sessionAttributes["length"] = time;
-            say = "Do you want breathing meditation or music meditation?";
+            say = "Would you prefer to do breathing meditation or music meditation?";
             context.succeed({sessionAttributes: sessionAttributes, response: buildSpeechletResponse(say, shouldEndSession) });
         }
         else if (IntentName === "BeginMeditationIntent") {
-            say = "Let's begin: please close your eyes and sit comfortably.";
+            say = "Let's begin: please close your eyes and sit comfortably. ";
             sessionAttributes.meditation = event.request.intent.slots.Meditation.value;
             shouldEndSession = true;
             
@@ -47,8 +47,14 @@ exports.handler = function( event, context ) {
                 }
             } else {
                 say += " Kick back, relax, and flow along with some of this music!";
-                for(var i = 0; i < parseInt(sessionAttributes.length); i++){
+                var n = parseInt(sessionAttributes.length);
+                if (n > 5) {
+                    n = 5;
+                }
+                //var n = Math.min([5,parseInt(sessionAttributes.length)]);
+                for(var i = 0; i < n; i++){
                     say += '<audio src="https://raw.githubusercontent.com/bhavingpt/alexa-meditate/master/music/60s_fade.mp3" />';
+                    //say += '<audio src="https://raw.githubusercontent.com/bhavingpt/alexa-meditate/master/music/cafe_generic.mp3" />';
                 }
             }
             
