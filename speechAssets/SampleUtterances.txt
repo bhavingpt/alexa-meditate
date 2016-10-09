@@ -12,3 +12,6 @@ BeginMeditationIntent {Meditation} meditation
 QuickStartMeditationIntent I need to meditate right now
 QuickStartMeditationIntent can we meditate right now
 QuickStartMeditationIntent let's meditate right now
+
+EndMeditationIntent I feel like a {Score}
+EndMeditationIntent I feel like an {Score}

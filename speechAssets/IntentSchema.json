@@ -21,6 +21,15 @@
     		}
     	]
     },
+    {
+        "intent": "EndMeditationIntent",
+        "slots":[
+            {
+                "name":"Score",
+                "type":"LIST_OF_SCORES"
+            }
+        ]
+    },
     {"intent": "QuickStartMeditationIntent"},
     {"intent": "AMAZON.HelpIntent"},
     {"intent": "AMAZON.StopIntent"},

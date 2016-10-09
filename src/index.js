@@ -4,6 +4,8 @@ var quickMeditationSSML = '<speak>Let\'s begin. Before starting, sit comfortably
 
 var http = require('http');
 
+var BASE_URL = "http://b42d022f.ngrok.io";
+
 exports.handler = function(event, context) {
     var say = "";
     var shouldEndSession = false;
@@ -14,14 +16,7 @@ exports.handler = function(event, context) {
     }
 
     if (event.request.type === "LaunchRequest") {
-        console.log("Launch Request");
-        var options = {
-            host: 'http://b42d022f.ngrok.io',
-            path: '/lastScore'
-        };
-        // var options = {host: 'www.random.org', path: '/integers/?num=1&min=1&max=10&col=1&base=10&format=plain&rnd=new'};
-
-        http.get("http://b42d022f.ngrok.io/lastScore", function(response) {
+        http.get(BASE_URL+"/lastScore", function(response) {
             console.log(response);
             var lastScore = "";
             response.on('data', function(d) {
@@ -30,7 +25,7 @@ exports.handler = function(event, context) {
             });
             response.on('end', function() {
                 console.log(lastScore);
-                say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session was a " + lastScore + " out of 10: are you ready to make this one even better?";
+                say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session made you feel like a " + lastScore + " out of 10: are you ready to make this one even better?";
                 console.log(say);
                 console.log(lastScore);
                 context.succeed({
@@ -63,7 +58,6 @@ exports.handler = function(event, context) {
         else if (IntentName === "BeginMeditationIntent") {
             say = "Let's begin: please close your eyes and sit comfortably. ";
             sessionAttributes.meditation = event.request.intent.slots.Meditation.value;
-            shouldEndSession = true;
 
             if (sessionAttributes.meditation == "breathing") {
                 var firstN = parseInt(sessionAttributes.length) * 6;
@@ -82,19 +76,45 @@ exports.handler = function(event, context) {
                     //say += '<audio src="https://raw.githubusercontent.com/bhavingpt/alexa-meditate/master/music/cafe_generic.mp3" />';
                 }
             }
+            say += "Perfect, I hope you enjoyed your session. On a scale of one to ten, how good do you feel right now?";
+            context.succeed({
+                sessionAttributes: sessionAttributes,
+                response: buildSpeechletResponse(say, shouldEndSession)
+            });
+        } 
+        else if (IntentName === "EndMeditationIntent") {
+            sessionAttributes.score = event.request.intent.slots.Score.value;
+            shouldEndSession = true;
+            say = "Great! Stay chill until next time.";
+
+            http.get(BASE_URL+"/session_rating?score="+sessionAttributes.score, function(response) {
+                console.log(response);
+                var lastScore = "";
+                response.on('data', function(d) {
+                    lastScore += d;
+                });
+                response.on('end', function() {
+                    context.succeed({
+                        sessionAttributes: sessionAttributes,
+                        response: buildSpeechletResponse(say, shouldEndSession)
+                    });
+                });
+            }).end(); // .end() was in the wrong fucking place
 
             context.succeed({
                 sessionAttributes: sessionAttributes,
                 response: buildSpeechletResponse(say, shouldEndSession)
             });
-        } else if (IntentName === "AMAZON.StopIntent" || IntentName === "AMAZON.CancelIntent") {
+        }
+        else if (IntentName === "AMAZON.StopIntent" || IntentName === "AMAZON.CancelIntent") {
             say = "You asked for " + sessionAttributes.requestList.toString() + ". Thanks for playing!";
             shouldEndSession = true;
             context.succeed({
                 sessionAttributes: sessionAttributes,
                 response: buildSpeechletResponse(say, shouldEndSession)
             });
-        } else if (IntentName === "AMAZON.HelpIntent") {
+        } 
+        else if (IntentName === "AMAZON.HelpIntent") {
             say = "Just chill out, dude."
             context.succeed({
                 sessionAttributes: sessionAttributes,
