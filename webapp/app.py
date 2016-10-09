@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return "Home page"
+    return send_from_directory('static', 'index.html')
 
 @app.route('/session_rating')
 def add_session():
