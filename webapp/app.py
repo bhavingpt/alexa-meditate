@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, render_template, jsonify
+from flask import Flask, request, Response, render_template, jsonify, send_from_directory
 from functools import wraps
 import sqlite3
 import logging
@@ -26,6 +26,14 @@ def admin():
     entries = cursor.fetchall()
     conn.close()
     return render_template('display.html',entries = entries)
+
+@app.route('/lastScore')
+def lastScore():
+    conn = sqlite3.connect("main.db")
+    cursor = conn.execute("SELECT rating from Feedback ORDER BY time DESC")
+    entries = cursor.fetchall()
+    conn.close()
+    return str(entries[0][0])
 
 
 if(__name__ == "__main__"):
