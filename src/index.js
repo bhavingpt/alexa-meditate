@@ -69,7 +69,7 @@ exports.handler = function(event, context) {
                 var firstN = parseInt(sessionAttributes.length) * 6;
                 say += "Now, ";
                 for(var i = 0; i < firstN; i++){
-                    say += 'Slowly inhale. <break time="3s"/> Slowly exhale. <break time="3s"/>';
+                    say += ' Slowly inhale. <break time="3s"/> Slowly exhale. <break time="3s"/>';
                 }
             } else {
                 say += " Kick back, relax, and flow along with some of this music!";
