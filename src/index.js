@@ -4,7 +4,7 @@ var quickMeditationSSML = '<speak>Let\'s begin. Before starting, sit comfortably
 
 var http = require('http');
 
-var BASE_URL = "http://b42d022f.ngrok.io";
+var BASE_URL = "http://aba8c5a2.ngrok.io";
 
 exports.handler = function(event, context) {
     var say = "";
@@ -25,7 +25,13 @@ exports.handler = function(event, context) {
             });
             response.on('end', function() {
                 console.log(lastScore);
-                say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session made you feel like a " + lastScore + " out of 10: are you ready to make this one even better?";
+                lastScore = parseInt(lastScore);
+                if(lastScore.toString() != "NaN"){
+                    say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session made you feel like a " + lastScore + " out of 10: are you ready to make this one even better?";
+                }
+                else{
+                    say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Are you ready to have a great session?";
+                }
                 console.log(say);
                 console.log(lastScore);
                 context.succeed({
