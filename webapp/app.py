@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, render_template, jsonify
+from flask import Flask, request, Response, render_template, jsonify, send_from_directory
 from functools import wraps
 import sqlite3
 import logging
