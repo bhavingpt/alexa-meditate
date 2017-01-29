@@ -9,6 +9,10 @@ AddMeditationIntent I would like to meditate for {Length} minutes
 AddMeditationIntent I would like to meditate for {Length} minute
 AddMeditationIntent {Length} minutes
 AddMeditationIntent {Length} minute
+AddMeditationIntent I would like to meditate for {Length} seconds
+AddMeditationIntent I would like to meditate for {Length} seconds
+AddMeditationIntent {Length} seconds
+AddMeditationIntent {Length} seconds
 
 BeginMeditationIntent I would like to do {Meditation} meditation
 BeginMeditationIntent {Meditation} meditation

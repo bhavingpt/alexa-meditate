@@ -27,10 +27,10 @@ exports.handler = function(event, context) {
                 console.log(lastScore);
                 lastScore = parseInt(lastScore);
                 if(lastScore.toString() != "NaN"){
-                    say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session made you feel like a " + lastScore + " out of 10: are you ready to make this one even better?";
+                    say = "Hello <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Your last session made you feel like a " + lastScore + " out of 10: are you ready to make this one even better?";
                 }
                 else{
-                    say = "Hello, <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Are you ready to have a great session?";
+                    say = "Hello <phoneme alphabet=\"ipa\" ph=\"'ruːʃi\">Rushi</phoneme>. Welcome to your meditation session. Are you ready to have a great session?";
                 }
                 console.log(say);
                 console.log(lastScore);
@@ -68,7 +68,7 @@ exports.handler = function(event, context) {
             if (sessionAttributes.meditation == "breathing") {
                 var firstN = parseInt(sessionAttributes.length) * 6;
                 say += "Now, ";
-                for(var i = 0; i < firstN; i++){
+                for(var i = 0; i < 3; i++){
                     say += ' Slowly inhale. <break time="3s"/> Slowly exhale. <break time="3s"/>';
                 }
             } else {
@@ -77,7 +77,7 @@ exports.handler = function(event, context) {
                 if (secondN > 5) {
                     secondN = 5;
                 }
-                for(var counter = 0; counter < secondN; counter++){
+                for(var counter = 0; counter < 1; counter++){
                     say += '<audio src="https://raw.githubusercontent.com/bhavingpt/alexa-meditate/master/music/60s_fade.mp3" />';
                     //say += '<audio src="https://raw.githubusercontent.com/bhavingpt/alexa-meditate/master/music/cafe_generic.mp3" />';
                 }
@@ -113,8 +113,8 @@ exports.handler = function(event, context) {
             });
         }
         else if (IntentName === "AMAZON.StopIntent" || IntentName === "AMAZON.CancelIntent") {
-            say = "You asked for " + sessionAttributes.requestList.toString() + ". Thanks for playing!";
             shouldEndSession = true;
+            say = "Goodbye.";
             context.succeed({
                 sessionAttributes: sessionAttributes,
                 response: buildSpeechletResponse(say, shouldEndSession)
